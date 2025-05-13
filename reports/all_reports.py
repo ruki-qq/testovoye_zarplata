@@ -1,10 +1,6 @@
 from workers_data import WorkerData
 
 
-class SalaryReport:
-    pass
-
-
 def salary_report(workers_data: list[WorkerData]):
     report: dict[str, list[dict[str, dict[str, int | str]]]] = {}
     for worker in workers_data:
