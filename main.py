@@ -1,27 +1,28 @@
-import sys
+import argparse
 
-from reports.salary import salary_report
-from worker_data import WorkerData
+import reports
+from workers_data.get_workers_data import create_workers_data_list_v1
 
 
-def create_workers_data_list(file_name: str) -> list[WorkerData]:
-    with open(file_name, "r") as f:
-        columns: list[str] = f.readline().rstrip().split(",")
-        worker_list: list[WorkerData] = []
-        for line in f:
-            worker: dict[str, int | str] = {}
-            values = line.rstrip().split(",")
-            for idx, value in enumerate(values):
-                try:
-                    value = int(value)
-                except ValueError:
-                    pass
-                worker[columns[idx]] = value
-            worker_list.append(WorkerData(**worker))
-    return worker_list
+def main():
+    parser = argparse.ArgumentParser(
+        description="Parse arguments to generate reports based on workers data"
+    )
+    parser.add_argument(
+        "files", nargs="+", help="Paths to CSV files containing workers data"
+    )
+    parser.add_argument(
+        "--report",
+        required=True,
+        help="Generate reports based on workers data",
+        choices=reports.REPORTS,
+    )
+    args: argparse.Namespace = parser.parse_args()
+
+    for filename in args.files:
+        workers_data = create_workers_data_list_v1(filename)
+        reports.REPORTS[args.report](workers_data)
 
 
 if __name__ == "__main__":
-    for filename in sys.argv[1:]:
-        workers_data = create_workers_data_list(filename)
-        salary_report(workers_data)
+    main()

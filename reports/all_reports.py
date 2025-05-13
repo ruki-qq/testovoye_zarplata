@@ -1,4 +1,8 @@
-from worker_data import WorkerData
+from workers_data import WorkerData
+
+
+class SalaryReport:
+    pass
 
 
 def salary_report(workers_data: list[WorkerData]):
