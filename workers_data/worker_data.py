@@ -17,7 +17,9 @@ class WorkerData:
         result = (
             self.hourly_rate
             if self.hourly_rate
-            else self.rate if self.rate else self.salary
+            else self.rate
+            if self.rate
+            else self.salary
         )
         if result:
             return result
@@ -32,7 +34,9 @@ class WorkerData:
         for _, field in self.__dataclass_fields__.items():
             actual_type = getattr(self, field.name)
             if not isinstance(actual_type, field.type):
-                raise TypeError(f"{field.name} - expected {field.type} but got {type(actual_type)}")
+                raise TypeError(
+                    f"{field.name} - expected {field.type} but got {type(actual_type)}"
+                )
         return is_ok
 
     def __post_init__(self):
