@@ -2,7 +2,7 @@ import json
 from workers_data import WorkerData
 
 
-def salary_report(workers_data: list[WorkerData]):
+def salary_report(workers_data: list[WorkerData]) -> str:
     report: dict[str, list[dict[str, dict[str, int | str]]]] = {}
     for worker in workers_data:
         worker_salary: dict[str, dict[str, str]] = {

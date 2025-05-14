@@ -34,7 +34,7 @@ def test_salary_report_multiple_departments(
         my_worker_hourly_rate,
         my_worker_salary,
     ]
-    report = json.loads(salary_report(workers))
+    report: dict[str] = json.loads(salary_report(workers))
 
     assert "Dept" in report and "Dept1" in report
     assert report["Dept"][0]["Test"]["rate"] == 20
