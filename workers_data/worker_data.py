@@ -14,11 +14,14 @@ class WorkerData:
 
     @property
     def hourly_salary(self):
-        return (
+        result = (
             self.hourly_rate
             if self.hourly_rate
             else self.rate if self.rate else self.salary
         )
+        if result:
+            return result
+        raise TypeError("You must provide a hourly_rate or rate or salary")
 
     @property
     def result_salary(self):

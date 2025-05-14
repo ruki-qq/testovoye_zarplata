@@ -1,4 +1,4 @@
-from worker_data import WorkerData
+from .worker_data import WorkerData
 
 
 def create_workers_data_list_v1(file_name: str) -> list[WorkerData]:

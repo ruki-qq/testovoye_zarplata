@@ -1,7 +1,7 @@
 import argparse
 
-import reports
-from workers_data.get_workers_data import create_workers_data_list_v1
+from reports import REPORTS
+from workers_data import create_workers_data_list_v1
 
 
 def main():
@@ -15,13 +15,13 @@ def main():
         "--report",
         required=True,
         help="Generate reports based on workers data",
-        choices=reports.REPORTS,
+        choices=REPORTS,
     )
     args: argparse.Namespace = parser.parse_args()
 
     for filename in args.files:
         workers_data = create_workers_data_list_v1(filename)
-        reports.REPORTS[args.report](workers_data)
+        REPORTS[args.report](workers_data)
 
 
 if __name__ == "__main__":

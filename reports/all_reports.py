@@ -1,3 +1,4 @@
+import json
 from workers_data import WorkerData
 
 
@@ -14,4 +15,4 @@ def salary_report(workers_data: list[WorkerData]):
         if worker.department not in report:
             report[worker.department] = []
         report[worker.department].append(worker_salary)
-    print(report)
+    print(json.dumps(report, indent=2))
