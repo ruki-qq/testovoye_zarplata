@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 
 
 @dataclass
@@ -26,3 +26,14 @@ class WorkerData:
     @property
     def result_salary(self):
         return int(self.hourly_salary) * int(self.hours_worked)
+
+    def validate(self):
+        is_ok = True
+        for _, field in self.__dataclass_fields__.items():
+            actual_type = getattr(self, field.name)
+            if not isinstance(actual_type, field.type):
+                raise TypeError(f"{field.name} - expected {field.type} but got {type(actual_type)}")
+        return is_ok
+
+    def __post_init__(self):
+        self.validate()
