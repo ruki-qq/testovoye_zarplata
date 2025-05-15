@@ -2,8 +2,6 @@ import pytest
 
 from workers_data import WorkerData
 
-# test_workers_fixtures
-
 
 @pytest.fixture
 def my_worker_hourly_rate():
@@ -59,9 +57,6 @@ def my_worker_none():
         rate=None,
         salary=None,
     )
-
-
-# test_csv_to_objects fixtures
 
 
 @pytest.fixture

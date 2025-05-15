@@ -3,6 +3,8 @@ from workers_data import WorkerData
 
 
 def salary_report(workers_data: list[WorkerData]) -> str:
+    """Create salary report from workers data"""
+
     report: dict[str, list[dict[str, dict[str, int | str]]]] = {}
     for worker in workers_data:
         worker_salary: dict[str, dict[str, str]] = {
@@ -15,5 +17,4 @@ def salary_report(workers_data: list[WorkerData]) -> str:
         if worker.department not in report:
             report[worker.department] = []
         report[worker.department].append(worker_salary)
-    print(json.dumps(report))
     return json.dumps(report, indent=2)

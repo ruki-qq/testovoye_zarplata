@@ -21,7 +21,7 @@ def main():
 
     for filename in args.files:
         workers_data = create_workers_data_list_v1(filename)
-        REPORTS[args.report](workers_data)
+        print(REPORTS[args.report](workers_data))
 
 
 if __name__ == "__main__":

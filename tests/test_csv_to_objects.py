@@ -18,6 +18,7 @@ def test_create_workers_data_list_v1_valid_hourly_rate(tmp_path, csv_data_hourly
     assert worker.hourly_salary == 50
     assert worker.result_salary == 160 * 50
 
+
 def test_create_workers_data_list_v1_valid_rate(tmp_path, csv_data_rate):
     file_path = tmp_path / "workers.csv"
     file_path.write_text(csv_data_rate)
@@ -27,6 +28,7 @@ def test_create_workers_data_list_v1_valid_rate(tmp_path, csv_data_rate):
     assert worker.rate == 35
     assert worker.hourly_salary == 35
     assert worker.result_salary == 150 * 35
+
 
 def test_create_workers_data_list_v1_valid_salary(tmp_path, csv_data_salary):
     file_path = tmp_path / "workers.csv"
@@ -38,11 +40,13 @@ def test_create_workers_data_list_v1_valid_salary(tmp_path, csv_data_salary):
     assert worker.hourly_salary == 37
     assert worker.result_salary == 160 * 37
 
+
 def test_create_workers_data_list_v1_invalid_type(tmp_path, csv_data_invalid):
     file_path = tmp_path / "workers.csv"
     file_path.write_text(csv_data_invalid)
     with pytest.raises(TypeError):
         create_workers_data_list_v1(str(file_path))
+
 
 def test_create_workers_data_list_v1_missing_required_field(tmp_path, csv_data_missing):
     file_path = tmp_path / "workers.csv"
@@ -50,9 +54,9 @@ def test_create_workers_data_list_v1_missing_required_field(tmp_path, csv_data_m
     with pytest.raises(TypeError):
         create_workers_data_list_v1(str(file_path))
 
+
 def test_create_workers_data_list_v1_extra_column(tmp_path, csv_data_extra):
     file_path = tmp_path / "workers.csv"
     file_path.write_text(csv_data_extra)
     with pytest.raises(TypeError):
         create_workers_data_list_v1(str(file_path))
-

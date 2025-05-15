@@ -1,4 +1,4 @@
-__all__ = ["REPORTS"]
+__all__ = ["REPORTS", "salary_report"]
 
 from .all_reports import salary_report
 

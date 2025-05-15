@@ -17,9 +17,7 @@ class WorkerData:
         result = (
             self.hourly_rate
             if self.hourly_rate
-            else self.rate
-            if self.rate
-            else self.salary
+            else self.rate if self.rate else self.salary
         )
         if result:
             return result
@@ -30,6 +28,8 @@ class WorkerData:
         return int(self.hourly_salary) * int(self.hours_worked)
 
     def validate(self):
+        """Validate fields types"""
+
         is_ok = True
         for _, field in self.__dataclass_fields__.items():
             actual_type = getattr(self, field.name)

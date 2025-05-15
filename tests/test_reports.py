@@ -1,8 +1,8 @@
 import json
-from reports.all_reports import salary_report
+from reports import salary_report
 
 
-def test_salary_report_single_worker(capsys, my_worker_hourly_rate):
+def test_salary_report_single_worker(my_worker_hourly_rate):
     report = json.loads(salary_report([my_worker_hourly_rate]))
 
     assert "Dept" in report
@@ -13,7 +13,7 @@ def test_salary_report_single_worker(capsys, my_worker_hourly_rate):
 
 
 def test_salary_report_multiple_workers_same_department(
-    capsys, my_worker_hourly_rate, my_worker_rate
+    my_worker_hourly_rate, my_worker_rate
 ):
     workers = [
         my_worker_hourly_rate,
@@ -27,9 +27,7 @@ def test_salary_report_multiple_workers_same_department(
     assert report["Dept"][1]["Test1"]["result_salary"] == 20000
 
 
-def test_salary_report_multiple_departments(
-    capsys, my_worker_hourly_rate, my_worker_salary
-):
+def test_salary_report_multiple_departments(my_worker_hourly_rate, my_worker_salary):
     workers = [
         my_worker_hourly_rate,
         my_worker_salary,
@@ -41,13 +39,13 @@ def test_salary_report_multiple_departments(
     assert report["Dept1"][0]["Test2"]["rate"] == 1000
 
 
-def test_salary_report_uses_rate_when_hourly_rate_missing(capsys, my_worker_rate):
+def test_salary_report_uses_rate_when_hourly_rate_missing(my_worker_rate):
     report = json.loads(salary_report([my_worker_rate]))
 
     assert report["Dept"][0]["Test1"]["rate"] == 500
     assert report["Dept"][0]["Test1"]["result_salary"] == 20000
 
 
-def test_salary_report_empty_input(capsys):
+def test_salary_report_empty_input():
     report = json.loads(salary_report([]))
     assert report == {}
